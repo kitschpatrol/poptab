@@ -1,0 +1,64 @@
+{
+	"explorer.fileNesting.enabled": true,
+	"explorer.fileNesting.expand": false,
+	"explorer.fileNesting.patterns": {
+		".env": ".env.*",
+		"package.json": ".*ignore, .*rc, .*.js, .*.mjs, .*.cjs, .*.ts, .*.mts, .*.cts, .*.json, .*.jsonc, .*.json5, .*.yml, .*.yaml, *config.js, *config.mjs, *config.cjs, *config.ts, *config.mts, *config.cts, *config.json, *config.jsonc, *config.json5, *config.yml, *config.yaml, pnpm*, workspace*, yarn*, lerna.json, netlify.toml, package-lock.json, turbo.json, vercel.json, wrangler.toml, yarn.lock",
+		"readme.md": "authors*, backers*, changelog*, citation*, code_of_conduct*, contributing*, contributors*, copying*, credits*, governance*, history*, license*, maintainers*, release_notes*, security*, sponsors*"
+	},
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "explicit",
+		"source.organizeImports": "never"
+	},
+	"eslint.enable": true,
+	"eslint.runtime": "node",
+	"eslint.validate": [
+		"astro",
+		"html",
+		"javascript",
+		"javascriptreact",
+		"json",
+		"json5",
+		"jsonc",
+		"markdown",
+		"mdx",
+		"svelte",
+		"toml",
+		"typescript",
+		"typescriptreact",
+		"xml",
+		"yaml"
+	],
+	"eslint.useFlatConfig": true,
+	"cSpell.enabled": true,
+	"cSpell.workspaceRootPath": ".",
+	"[astro]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[gitignore]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[ruby]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[shellscript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[svelte]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"prettier.documentSelectors": [
+		"**/.eslintignore",
+		"**/.node-version",
+		"**/.npmrc",
+		"**/.prettierignore",
+		"**/*.astro",
+		"**/*.rb",
+		"**/*.svelte"
+	],
+	"prettier.enable": true
+}
