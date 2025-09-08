@@ -39,8 +39,8 @@
 	"scripts": {
 		"build": "pkgroll --clean-dist --minify --tsconfig ./tsconfig.build.json",
 		"clean": "git rm -f pnpm-lock.yaml ; git clean -fdX",
-		"fix": "kpi fix",
-		"lint": "kpi lint",
+		"fix": "ksc fix",
+		"lint": "ksc lint",
 		"release": "bumpp --commit 'Release: %s' && pnpm run build && pnpm publish --otp $(op read 'op://Personal/Npmjs/one-time password?attribute=otp')",
 		"test": "vitest"
 	},
@@ -51,7 +51,7 @@
 		"yargs": "^17.7.2"
 	},
 	"devDependencies": {
-		"@kitschpatrol/shared-config": "^5.6.0",
+		"@kitschpatrol/shared-config": "^5.7.0",
 		"@sindresorhus/is": "^7.0.2",
 		"bumpp": "^10.2.3",
 		"defu": "^6.1.4",
@@ -63,6 +63,9 @@
 	"engines": {
 		"node": ">=20.19.0"
 	},
+	"os": [
+		"darwin"
+	],
 	"publishConfig": {
 		"access": "public"
 	}
