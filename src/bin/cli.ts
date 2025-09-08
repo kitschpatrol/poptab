@@ -22,7 +22,7 @@ await yargsInstance
 				.option('url-contains', {
 					alias: 'u',
 					default: POP_TAB_OPTIONS_DEFAULTS.urlContains,
-					describe: 'URL pattern that tabs must contain to be closed',
+					describe: 'String that tab URLs must contain to be closed',
 					type: 'string',
 				}),
 		async ({ browser, urlContains }) => {
