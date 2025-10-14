@@ -37,7 +37,7 @@
 		"dist/*"
 	],
 	"scripts": {
-		"build": "pkgroll --clean-dist --minify --tsconfig ./tsconfig.build.json",
+		"build": "tsdown",
 		"clean": "git rm -f pnpm-lock.yaml ; git clean -fdX",
 		"fix": "ksc fix",
 		"lint": "ksc lint",
@@ -45,21 +45,21 @@
 		"test": "vitest"
 	},
 	"dependencies": {
-		"@types/node": "^20.19.13",
+		"@types/node": "^20.19.21",
 		"@types/yargs": "^17.0.33",
 		"nano-spawn": "^1.0.3",
 		"yargs": "^17.7.2"
 	},
 	"devDependencies": {
-		"@kitschpatrol/shared-config": "^5.7.0",
-		"@sindresorhus/is": "^7.0.2",
-		"bumpp": "^10.2.3",
+		"@kitschpatrol/shared-config": "^5.7.2",
+		"@sindresorhus/is": "^7.1.0",
+		"bumpp": "^10.3.1",
 		"defu": "^6.1.4",
-		"pkgroll": "^2.15.4",
-		"typescript": "~5.9.2",
+		"tsdown": "^0.15.7",
+		"typescript": "~5.9.3",
 		"vitest": "^3.2.4"
 	},
-	"packageManager": "pnpm@10.15.1",
+	"packageManager": "pnpm@10.18.2",
 	"engines": {
 		"node": ">=20.19.0"
 	},
