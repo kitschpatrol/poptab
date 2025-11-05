@@ -31,7 +31,7 @@
 	"module": "./dist/lib/index.js",
 	"types": "./dist/lib/index.d.ts",
 	"bin": {
-		"poptab": "dist/bin/cli.js"
+		"poptab": "dist/bin/cli.mjs"
 	},
 	"files": [
 		"dist/*"
@@ -41,25 +41,26 @@
 		"clean": "git rm -f pnpm-lock.yaml ; git clean -fdX",
 		"fix": "ksc fix",
 		"lint": "ksc lint",
-		"release": "bumpp --commit 'Release: %s' && pnpm run build && pnpm publish --otp $(op read 'op://Personal/Npmjs/one-time password?attribute=otp')",
+		"release": "bumpp --commit 'Release: %s' && pnpm run build && NPM_AUTH_TOKEN=$(op read 'op://Personal/npm/token') && pnpm publish",
 		"test": "vitest"
 	},
 	"dependencies": {
-		"@types/node": "^20.19.21",
-		"@types/yargs": "^17.0.33",
-		"nano-spawn": "^1.0.3",
+		"@types/node": "^20.19.24",
+		"@types/yargs": "^17.0.34",
+		"nano-spawn": "^2.0.0",
 		"yargs": "^17.7.2"
 	},
 	"devDependencies": {
-		"@kitschpatrol/shared-config": "^5.7.2",
-		"@sindresorhus/is": "^7.1.0",
+		"@kitschpatrol/shared-config": "^5.8.1",
+		"@sindresorhus/is": "^7.1.1",
 		"bumpp": "^10.3.1",
 		"defu": "^6.1.4",
-		"tsdown": "^0.15.7",
+		"mdat-plugin-cli-help": "^1.0.1",
+		"tsdown": "^0.16.0",
 		"typescript": "~5.9.3",
-		"vitest": "^3.2.4"
+		"vitest": "^4.0.7"
 	},
-	"packageManager": "pnpm@10.18.2",
+	"packageManager": "pnpm@10.20.0",
 	"engines": {
 		"node": ">=20.19.0"
 	},

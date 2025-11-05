@@ -84,12 +84,12 @@ Usage:
 poptab
 ```
 
-| Option                   | Description                                     | Type                               | Default          |
-| ------------------------ | ----------------------------------------------- | ---------------------------------- | ---------------- |
-| `--browser`<br>`-b`      | Browser to target for tab cleanup               | `"chromium"` `"chrome"` `"safari"` | `"chromium"`     |
-| `--url-contains`<br>`-u` | URL pattern that tabs must contain to be closed | `string`                           | `"//localhost:"` |
-| `--help`<br>`-h`         | Show help                                       | `boolean`                          |                  |
-| `--version`<br>`-v`      | Show version number                             | `boolean`                          |                  |
+| Option                   | Description                                    | Type                               | Default          |
+| ------------------------ | ---------------------------------------------- | ---------------------------------- | ---------------- |
+| `--browser`<br>`-b`      | Browser to target for tab cleanup              | `"chromium"` `"chrome"` `"safari"` | `"chromium"`     |
+| `--url-contains`<br>`-u` | String that tab URLs must contain to be closed | `string`                           | `"//localhost:"` |
+| `--help`<br>`-h`         | Show help                                      | `boolean`                          |                  |
+| `--version`<br>`-v`      | Show version number                            | `boolean`                          |                  |
 
 <!-- /cli-help -->
 
