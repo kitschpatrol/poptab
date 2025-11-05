@@ -31,7 +31,7 @@
 	"module": "./dist/lib/index.js",
 	"types": "./dist/lib/index.d.ts",
 	"bin": {
-		"poptab": "dist/bin/cli.mjs"
+		"poptab": "dist/bin/cli.js"
 	},
 	"files": [
 		"dist/*"
@@ -55,7 +55,7 @@
 		"@sindresorhus/is": "^7.1.1",
 		"bumpp": "^10.3.1",
 		"defu": "^6.1.4",
-		"mdat-plugin-cli-help": "^1.0.1",
+		"mdat-plugin-cli-help": "^1.0.2",
 		"tsdown": "^0.16.0",
 		"typescript": "~5.9.3",
 		"vitest": "^4.0.7"
