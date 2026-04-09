@@ -26,8 +26,15 @@ await yargsInstance
 					default: POP_TAB_OPTIONS_DEFAULTS.urlContains,
 					describe: 'String that tab URLs must contain to be closed',
 					type: 'string',
+				})
+				.option('strict', {
+					alias: 's',
+					default: false,
+					describe:
+						'Exit with a non-zero status code on failure. Default is to report errors but exit cleanly so poptab can be safely chained in scripts (e.g. `poptab && next-command`).',
+					type: 'boolean',
 				}),
-		async ({ browser, urlContains }) => {
+		async ({ browser, strict, urlContains }) => {
 			try {
 				const options: PopTabOptions = {
 					browser: browser as PopTabOptions['browser'],
@@ -45,7 +52,9 @@ await yargsInstance
 				}
 			} catch (error) {
 				process.stderr.write(`Error: ${error instanceof Error ? error.message : String(error)}\n`)
-				process.exitCode = 1
+				if (strict) {
+					process.exitCode = 1
+				}
 			}
 		},
 	)
