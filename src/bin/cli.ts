@@ -31,15 +31,23 @@ await yargsInstance
 					alias: 's',
 					default: false,
 					describe:
-						'Exit with a non-zero status code on failure. Default is to report errors but exit cleanly so poptab can be safely chained in scripts (e.g. `poptab && next-command`).',
+						'Exit with a non-zero status code on failure. Default is to exit cleanly so poptab can be safely chained in scripts (e.g. `poptab && next-command`).',
+					type: 'boolean',
+				})
+				.option('verbose', {
+					default: false,
+					describe:
+						'Print status messages (successes, skips, and errors). Default is silent so poptab does not clutter script output.',
 					type: 'boolean',
 				}),
-		async ({ browser, strict, urlContains }) => {
+		async ({ browser, strict, urlContains, verbose }) => {
 			try {
 				if (process.platform !== 'darwin') {
-					process.stderr.write(
-						`poptab: skipping, only supported on macOS (platform: ${process.platform}).\n`,
-					)
+					if (verbose) {
+						process.stderr.write(
+							`poptab: skipping, only supported on macOS (platform: ${process.platform}).\n`,
+						)
+					}
 					if (strict) {
 						process.exitCode = 1
 					}
@@ -53,15 +61,19 @@ await yargsInstance
 
 				const closedCount = await popTab(options)
 
-				if (closedCount === 0) {
-					process.stdout.write('No matching tabs found to close.\n')
-				} else {
-					process.stdout.write(
-						`Successfully closed ${closedCount} tab${closedCount === 1 ? '' : 's'}.\n`,
-					)
+				if (verbose) {
+					if (closedCount === 0) {
+						process.stdout.write('No matching tabs found to close.\n')
+					} else {
+						process.stdout.write(
+							`Successfully closed ${closedCount} tab${closedCount === 1 ? '' : 's'}.\n`,
+						)
+					}
 				}
 			} catch (error) {
-				process.stderr.write(`Error: ${error instanceof Error ? error.message : String(error)}\n`)
+				if (verbose) {
+					process.stderr.write(`Error: ${error instanceof Error ? error.message : String(error)}\n`)
+				}
 				if (strict) {
 					process.exitCode = 1
 				}

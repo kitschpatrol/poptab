@@ -24,15 +24,17 @@ This is a trivial CLI tool to close browser tabs whose URLs contain a given URL 
 
 I use it in a few projects to clean up stale tabs during development sessions.
 
+By default, `poptab` is silent: it prints nothing on success, failure, or unsupported platforms, and exits `0`. Pass `--verbose` to surface status messages, and `--strict` to fail hard with a non-zero exit code. This makes `poptab` safe to drop into cross-platform `package.json` scripts without cluttering output.
+
 ## Getting started
 
 ### Dependencies
 
 The poptab CLI tool requires Node 20.19.0+. The exported APIs are ESM-only and share the Node 20.19.0+ requirement. Poptab is implemented in TypeScript and bundles type definitions.
 
-This is a macOS-only tool. It can close tabs in Chromium, Chrome, or Safari.
+It can close tabs in Chromium, Chrome, or Safari
 
-On Linux and Windows, `poptab` is a no-op: the CLI prints a warning and exits cleanly (exit code `0`), and the `popTab()` library function resolves with `0` without throwing. This keeps `poptab` safe to call unconditionally from cross-platform `package.json` scripts. Pass `--strict` (or check `process.platform` yourself when using the library) if you need a hard failure on unsupported platforms.
+The implementation relies on macOS-specific scripting capabilities. On Linux and Windows it is a no-op.
 
 ### Installation
 
@@ -73,8 +75,6 @@ console.log(`Closed ${closedTabs} tab(s)`)
 
 ### CLI
 
-Note that for ease of cross-platform script chaining, the CLI always returns `0` unless `--strict` is passed. This lets you write npm scripts like `"poptab && vite"`
-
 <!-- cli-help -->
 
 #### Command: `poptab`
@@ -87,19 +87,24 @@ Usage:
 poptab
 ```
 
-| Option                   | Description                                                                                                                                                           | Type                               | Default          |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- | ---------------- |
-| `--browser`<br>`-b`      | Browser to target for tab cleanup                                                                                                                                     | `"chromium"` `"chrome"` `"safari"` | `"chromium"`     |
-| `--url-contains`<br>`-u` | String that tab URLs must contain to be closed                                                                                                                        | `string`                           | `"//localhost:"` |
-| `--strict`<br>`-s`       | Exit with a non-zero status code on failure. Default is to report errors but exit cleanly so poptab can be safely chained in scripts (e.g. `poptab && next-command`). | `boolean`                          | `false`          |
-| `--help`<br>`-h`         | Show help                                                                                                                                                             | `boolean`                          |                  |
-| `--version`<br>`-v`      | Show version number                                                                                                                                                   | `boolean`                          |                  |
+| Option                   | Description                                                                                                                                         | Type                               | Default          |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- | ---------------- |
+| `--browser`<br>`-b`      | Browser to target for tab cleanup                                                                                                                   | `"chromium"` `"chrome"` `"safari"` | `"chromium"`     |
+| `--url-contains`<br>`-u` | String that tab URLs must contain to be closed                                                                                                      | `string`                           | `"//localhost:"` |
+| `--strict`<br>`-s`       | Exit with a non-zero status code on failure. Default is to exit cleanly so poptab can be safely chained in scripts (e.g. `poptab && next-command`). | `boolean`                          | `false`          |
+| `--verbose`              | Print status messages (successes, skips, and errors). Default is silent so poptab does not clutter script output.                                   | `boolean`                          | `false`          |
+| `--help`<br>`-h`         | Show help                                                                                                                                           | `boolean`                          |                  |
+| `--version`<br>`-v`      | Show version number                                                                                                                                 | `boolean`                          |                  |
 
 <!-- /cli-help -->
 
-## See also
+## Implementation notes
 
-- [kill-tabs](https://www.npmjs.com/package/kill-tabs) (But note that this kills _processes_ instead of closing actual tabs.)
+Other projects of interest:
+
+- [better-opn](https://github.com/michaellzc/better-opn/tree/master) AppleScript approach. Eponymous NPM package seems sketchy / abandoned.
+- [kill-tabs](https://www.npmjs.com/package/kill-tabs) This kills the _processes_ instead of closing actual tabs.
+- [open-in-browser-tab](https://www.npmjs.com/package/open-in-browser-tab) Pairs with a browser extension.
 
 ## Maintainers
 
