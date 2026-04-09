@@ -36,6 +36,16 @@ await yargsInstance
 				}),
 		async ({ browser, strict, urlContains }) => {
 			try {
+				if (process.platform !== 'darwin') {
+					process.stderr.write(
+						`poptab: skipping, only supported on macOS (platform: ${process.platform}).\n`,
+					)
+					if (strict) {
+						process.exitCode = 1
+					}
+					return
+				}
+
 				const options: PopTabOptions = {
 					browser: browser as PopTabOptions['browser'],
 					urlContains,

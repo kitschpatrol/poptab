@@ -98,9 +98,15 @@ describe('popTab', () => {
 	})
 
 	describe('validation', () => {
-		it('throws on non-macOS platforms', async () => {
+		it('returns 0 without spawning on non-macOS platforms', async () => {
 			Object.defineProperty(process, 'platform', { value: 'linux' })
-			await expect(popTab()).rejects.toThrow('only supported on macOS')
+			await expect(popTab()).resolves.toBe(0)
+			expect(mockSpawn).not.toHaveBeenCalled()
+		})
+
+		it('returns 0 without spawning on Windows', async () => {
+			Object.defineProperty(process, 'platform', { value: 'win32' })
+			await expect(popTab()).resolves.toBe(0)
 			expect(mockSpawn).not.toHaveBeenCalled()
 		})
 

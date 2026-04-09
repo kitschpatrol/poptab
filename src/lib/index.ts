@@ -18,9 +18,13 @@ export type PopTabOptions = {
  * Pop stale tabs from a browser.
  *
  * Firefox doesn't support enough AppleScript to work with this approach.
+ *
+ * This function is a no-op on non-macOS platforms: it resolves with `0`
+ * without throwing, so cross-platform scripts can call it unconditionally.
+ * Callers who need strict behavior should check `process.platform` directly.
  * @param options - The options to use for the pop tab operation.
- * @returns The number of stale tabs popped.
- * @throws {Error} If the browser is not supported or the platform is not macOS.
+ * @returns The number of stale tabs popped. Always `0` on non-macOS platforms.
+ * @throws {Error} If the AppleScript invocation fails.
  */
 export async function popTab(options?: PopTabOptions): Promise<number> {
 	const { browser, urlContains } = defu(options, POP_TAB_OPTIONS_DEFAULTS)
@@ -29,7 +33,7 @@ export async function popTab(options?: PopTabOptions): Promise<number> {
 	assert.all((value) => value === 'chromium' || value === 'chrome' || value === 'safari', browser)
 
 	if (process.platform !== 'darwin') {
-		throw new Error('The tab cleanup script is only supported on macOS')
+		return 0
 	}
 
 	const appleScriptBrowserNameMap = {
