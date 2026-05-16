@@ -1,10 +1,3 @@
-onlyBuiltDependencies:
-  - esbuild
-  - oxc-resolver
-  - puppeteer
-  - unrs-resolver
-
-# Required by @kitschpatrol/shared-config
 publicHoistPattern:
   - '@kitschpatrol/repo-config'
   - '@kitschpatrol/typescript-config'
@@ -16,3 +9,8 @@ publicHoistPattern:
   - '*prettier*'
   - '*remark*'
   - '*stylelint*'
+allowBuilds:
+  esbuild: true
+  oxc-resolver: true
+  puppeteer: true
+  unrs-resolver: true

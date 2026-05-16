@@ -19,10 +19,12 @@ export type PopTabOptions = {
  *
  * Firefox doesn't support enough AppleScript to work with this approach.
  *
- * This function is a no-op on non-macOS platforms: it resolves with `0`
- * without throwing, so cross-platform scripts can call it unconditionally.
- * Callers who need strict behavior should check `process.platform` directly.
+ * This function is a no-op on non-macOS platforms: it resolves with `0` without
+ * throwing, so cross-platform scripts can call it unconditionally. Callers who
+ * need strict behavior should check `process.platform` directly.
+ *
  * @param options - The options to use for the pop tab operation.
+ *
  * @returns The number of stale tabs popped. Always `0` on non-macOS platforms.
  * @throws {Error} If the AppleScript invocation fails.
  */
