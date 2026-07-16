@@ -2,8 +2,9 @@
 
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
+import type { PopTabOptions } from '../lib'
 import { version } from '../../package.json'
-import { popTab, POP_TAB_OPTIONS_DEFAULTS, type PopTabOptions } from '../lib'
+import { POP_TAB_OPTIONS_DEFAULTS, popTab } from '../lib'
 
 const yargsInstance = yargs(hideBin(process.argv))
 
@@ -12,8 +13,8 @@ await yargsInstance
 	.command(
 		'*',
 		'Close browser tabs containing a given URL string.',
-		(yargs) =>
-			yargs
+		(yargsState) =>
+			yargsState
 				.option('browser', {
 					alias: 'b',
 					choices: ['chromium', 'chrome', 'safari'] as const,
@@ -48,14 +49,16 @@ await yargsInstance
 							`poptab: skipping, only supported on macOS (platform: ${process.platform}).\n`,
 						)
 					}
+
 					if (strict) {
 						process.exitCode = 1
 					}
+
 					return
 				}
 
 				const options: PopTabOptions = {
-					browser: browser as PopTabOptions['browser'],
+					browser,
 					urlContains,
 				}
 
@@ -74,6 +77,7 @@ await yargsInstance
 				if (verbose) {
 					process.stderr.write(`Error: ${error instanceof Error ? error.message : String(error)}\n`)
 				}
+
 				if (strict) {
 					process.exitCode = 1
 				}

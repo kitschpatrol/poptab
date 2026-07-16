@@ -1,5 +1,5 @@
 /* eslint-disable ts/no-explicit-any */
-/* eslint-disable ts/no-unsafe-type-assertion */
+
 /* eslint-disable ts/no-unsafe-argument */
 // @case-police-ignore AppleScript
 
@@ -116,7 +116,7 @@ describe('popTab', () => {
 		})
 
 		it('throws on whitespace-only urlContains', async () => {
-			await expect(popTab({ browser: 'chromium', urlContains: '   ' })).rejects.toThrow()
+			await expect(popTab({ browser: 'chromium', urlContains: ' '.repeat(3) })).rejects.toThrow()
 			expect(mockSpawn).not.toHaveBeenCalled()
 		})
 	})
@@ -126,10 +126,17 @@ describe('popTab', () => {
 			const spawnError = new Error('osascript failed')
 			mockSpawn.mockRejectedValue(spawnError)
 
-			const error = await popTab().catch((error_: unknown) => error_)
-			expect(error).toBeInstanceOf(Error)
-			expect((error as Error).message).toBe('Error popping tabs')
-			expect((error as Error).cause).toBe(spawnError)
+			let thrownError: unknown
+
+			try {
+				await popTab()
+			} catch (error) {
+				thrownError = error
+			}
+
+			expect(thrownError).toBeInstanceOf(Error)
+			expect((thrownError as Error).message).toBe('Error popping tabs')
+			expect((thrownError as Error).cause).toBe(spawnError)
 		})
 	})
 })

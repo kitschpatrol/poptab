@@ -32,7 +32,10 @@ export async function popTab(options?: PopTabOptions): Promise<number> {
 	const { browser, urlContains } = defu(options, POP_TAB_OPTIONS_DEFAULTS)
 
 	assert.nonEmptyStringAndNotWhitespace(urlContains)
-	assert.all((value) => value === 'chromium' || value === 'chrome' || value === 'safari', browser)
+	assert.all(
+		(value) => typeof value === 'string' && ['chrome', 'chromium', 'safari'].includes(value),
+		browser,
+	)
 
 	if (process.platform !== 'darwin') {
 		return 0
@@ -65,7 +68,7 @@ export async function popTab(options?: PopTabOptions): Promise<number> {
 
 	try {
 		const { stdout } = await spawn('osascript', ['-e', appleScript])
-		const closedTabs = Number.parseInt(stdout, 10)
+		const closedTabs = Number(stdout)
 		return closedTabs
 	} catch (error) {
 		throw new Error(`Error popping tabs`, { cause: error })
