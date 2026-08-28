@@ -1,6 +1,5 @@
 /* eslint-disable ts/no-explicit-any */
 
-/* eslint-disable ts/no-unsafe-argument */
 // @case-police-ignore AppleScript
 
 import spawn from 'nano-spawn'
@@ -34,8 +33,7 @@ describe('popTab', () => {
 
 			const count = await popTab()
 
-			expect(mockSpawn).toHaveBeenCalledOnce()
-			expect(mockSpawn).toHaveBeenCalledWith('osascript', ['-e', expect.any(String)])
+			expect(mockSpawn).toHaveBeenCalledExactlyOnceWith('osascript', ['-e', expect.any(String)])
 
 			// @ts-expect-error - optional chaining
 			const appleScript = String(mockSpawn.mock.calls[0]?.[1]?.[1])

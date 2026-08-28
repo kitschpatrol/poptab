@@ -6,8 +6,8 @@
 
 <!-- badges -->
 
-[![NPM Package poptab](https://img.shields.io/npm/v/poptab.svg)](https://npmjs.com/package/poptab)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+[![NPM Package poptab](https://img.shields.io/npm/v/poptab.svg)](https://www.npmjs.com/package/poptab)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![CI](https://github.com/kitschpatrol/poptab/actions/workflows/ci.yml/badge.svg)](https://github.com/kitschpatrol/poptab/actions/workflows/ci.yml)
 
 <!-- /badges -->
@@ -22,7 +22,7 @@
 
 This is a trivial CLI tool to close browser tabs whose URLs contain a given URL string.
 
-I use it in a few projects to clean up stale tabs during development sessions.
+I use it in a few projects to clean up the stale tabs that tend to accumulate during development sessions.
 
 By default, `poptab` is silent: it prints nothing on success, failure, or unsupported platforms, and exits `0`. Pass `--verbose` to surface status messages, and `--strict` to fail hard with a non-zero exit code. This makes `poptab` safe to drop into cross-platform `package.json` scripts without cluttering output.
 
