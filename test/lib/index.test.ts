@@ -47,6 +47,7 @@ describe('popTab', () => {
 		it('exports expected default values', () => {
 			expect(POP_TAB_OPTIONS_DEFAULTS).toStrictEqual({
 				browser: 'chromium',
+				equivalentHosts: true,
 				urlContains: '//localhost:',
 			})
 		})
@@ -80,6 +81,59 @@ describe('popTab', () => {
 			// @ts-expect-error - optional chaining
 			const appleScript = String(mockSpawn.mock.calls[0]?.[1]?.[1])
 			expect(appleScript).toContain('example.com:3000')
+		})
+
+		it('escapes double quotes in the URL pattern', async () => {
+			await popTab({ urlContains: 'example.com/"quoted"' })
+
+			// @ts-expect-error - optional chaining
+			const appleScript = String(mockSpawn.mock.calls[0]?.[1]?.[1])
+			expect(appleScript).toContain(String.raw`example.com/\"quoted\"`)
+		})
+	})
+
+	describe('equivalent hosts', () => {
+		it('expands localhost to all loopback hosts by default', async () => {
+			await popTab()
+
+			// @ts-expect-error - optional chaining
+			const appleScript = String(mockSpawn.mock.calls[0]?.[1]?.[1])
+			expect(appleScript).toContain('(URL of t contains "//localhost:")')
+			expect(appleScript).toContain('(URL of t contains "//127.0.0.1:")')
+			expect(appleScript).toContain('(URL of t contains "//[::1]:")')
+			expect(appleScript).toContain('(URL of t contains "//0.0.0.0:")')
+		})
+
+		it('expands 127.0.0.1 to all loopback hosts', async () => {
+			await popTab({ urlContains: '127.0.0.1:5173' })
+
+			// @ts-expect-error - optional chaining
+			const appleScript = String(mockSpawn.mock.calls[0]?.[1]?.[1])
+			expect(appleScript).toContain('localhost:5173')
+			expect(appleScript).toContain('127.0.0.1:5173')
+			expect(appleScript).toContain('[::1]:5173')
+			expect(appleScript).toContain('0.0.0.0:5173')
+		})
+
+		it('matches only the given string when equivalentHosts is false', async () => {
+			await popTab({ equivalentHosts: false, urlContains: '//localhost:' })
+
+			// @ts-expect-error - optional chaining
+			const appleScript = String(mockSpawn.mock.calls[0]?.[1]?.[1])
+			expect(appleScript).toContain('//localhost:')
+			expect(appleScript).not.toContain('127.0.0.1')
+			expect(appleScript).not.toContain('[::1]')
+			expect(appleScript).not.toContain('0.0.0.0')
+		})
+
+		it('does not expand non-loopback hosts', async () => {
+			await popTab({ urlContains: 'example.com:3000' })
+
+			// @ts-expect-error - optional chaining
+			const appleScript = String(mockSpawn.mock.calls[0]?.[1]?.[1])
+			expect(appleScript).toContain('example.com:3000')
+			expect(appleScript).not.toContain('localhost')
+			expect(appleScript).not.toContain('127.0.0.1')
 		})
 	})
 

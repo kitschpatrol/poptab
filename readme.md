@@ -60,6 +60,8 @@ npm install --global poptab
 
 By default, poptab will close tabs in an open Chromium browser containing `//localhost:`.
 
+Also by default, loopback hosts are treated as interchangeable: if the URL string includes `localhost`, `127.0.0.1`, `[::1]`, or `0.0.0.0`, tabs matching any of the others are closed too. So the default match also catches tabs like `http://127.0.0.1:3000`. Pass `--no-equivalent-hosts` (or `equivalentHosts: false`) to match the URL string exactly.
+
 ### Library
 
 ```ts
@@ -87,14 +89,15 @@ Usage:
 poptab
 ```
 
-| Option                   | Description                                                                                                                                         | Type                               | Default          |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- | ---------------- |
-| `--browser`<br>`-b`      | Browser to target for tab cleanup                                                                                                                   | `"chromium"` `"chrome"` `"safari"` | `"chromium"`     |
-| `--url-contains`<br>`-u` | String that tab URLs must contain to be closed                                                                                                      | `string`                           | `"//localhost:"` |
-| `--strict`<br>`-s`       | Exit with a non-zero status code on failure. Default is to exit cleanly so poptab can be safely chained in scripts (e.g. `poptab && next-command`). | `boolean`                          | `false`          |
-| `--verbose`              | Print status messages (successes, skips, and errors). Default is silent so poptab does not clutter script output.                                   | `boolean`                          | `false`          |
-| `--help`<br>`-h`         | Show help                                                                                                                                           | `boolean`                          |                  |
-| `--version`<br>`-v`      | Show version number                                                                                                                                 | `boolean`                          |                  |
+| Option                       | Description                                                                                                                                                         | Type                               | Default          |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- | ---------------- |
+| `--browser`<br>`-b`          | Browser to target for tab cleanup                                                                                                                                   | `"chromium"` `"chrome"` `"safari"` | `"chromium"`     |
+| `--url-contains`<br>`-u`     | String that tab URLs must contain to be closed                                                                                                                      | `string`                           | `"//localhost:"` |
+| `--equivalent-hosts`<br>`-e` | Treat loopback hosts (localhost, 127.0.0.1, \[::1], 0.0.0.0) as interchangeable when matching tab URLs. Pass --no-equivalent-hosts to match the URL string exactly. | `boolean`                          | `true`           |
+| `--strict`<br>`-s`           | Exit with a non-zero status code on failure. Default is to exit cleanly so poptab can be safely chained in scripts (e.g. `poptab && next-command`).                 | `boolean`                          | `false`          |
+| `--verbose`                  | Print status messages (successes, skips, and errors). Default is silent so poptab does not clutter script output.                                                   | `boolean`                          | `false`          |
+| `--help`<br>`-h`             | Show help                                                                                                                                                           | `boolean`                          |                  |
+| `--version`<br>`-v`          | Show version number                                                                                                                                                 | `boolean`                          |                  |
 
 <!-- /cli-help -->
 

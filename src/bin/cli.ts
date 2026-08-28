@@ -28,6 +28,13 @@ await yargsInstance
 					describe: 'String that tab URLs must contain to be closed',
 					type: 'string',
 				})
+				.option('equivalent-hosts', {
+					alias: 'e',
+					default: POP_TAB_OPTIONS_DEFAULTS.equivalentHosts,
+					describe:
+						'Treat loopback hosts (localhost, 127.0.0.1, [::1], 0.0.0.0) as interchangeable when matching tab URLs. Pass --no-equivalent-hosts to match the URL string exactly.',
+					type: 'boolean',
+				})
 				.option('strict', {
 					alias: 's',
 					default: false,
@@ -41,7 +48,7 @@ await yargsInstance
 						'Print status messages (successes, skips, and errors). Default is silent so poptab does not clutter script output.',
 					type: 'boolean',
 				}),
-		async ({ browser, strict, urlContains, verbose }) => {
+		async ({ browser, equivalentHosts, strict, urlContains, verbose }) => {
 			try {
 				if (process.platform !== 'darwin') {
 					if (verbose) {
@@ -59,6 +66,7 @@ await yargsInstance
 
 				const options: PopTabOptions = {
 					browser,
+					equivalentHosts,
 					urlContains,
 				}
 
