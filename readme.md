@@ -56,6 +56,16 @@ Or, install globally for access across your system:
 npm install --global poptab
 ```
 
+Or, most often, it ends up in a `package.json` script, e.g.:
+
+```json
+{
+  "scripts": {
+    "dev": "poptab && vite dev"
+  }
+}
+```
+
 ## Usage
 
 By default, poptab will close tabs in an open Chromium browser containing `//localhost:`.
