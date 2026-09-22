@@ -51,27 +51,27 @@
 		"@types/yargs": "^17.0.35",
 		"defu": "^6.1.7",
 		"nano-spawn": "^2.1.0",
-		"yargs": "^18.1.0"
+		"yargs": "^18.2.0"
 	},
 	"devDependencies": {
 		"@arethetypeswrong/core": "^0.18.5",
-		"@kitschpatrol/shared-config": "^8.7.0",
-		"bumpp": "^12.2.2",
+		"@kitschpatrol/shared-config": "^8.10.0",
+		"bumpp": "^12.3.0",
 		"mdat-plugin-cli-help": "^3.2.0",
 		"publint": "^0.3.24",
 		"shx": "^0.4.0",
-		"tsdown": "^0.22.14",
+		"tsdown": "^0.23.0",
 		"typescript": "~6.0.3",
-		"vitest": "^4.1.11"
+		"vitest": "^5.0.1"
 	},
-	"packageManager": "pnpm@11.22.0",
+	"packageManager": "pnpm@12.4.0",
 	"engines": {
 		"node": ">=22.0.0"
 	},
 	"devEngines": {
 		"runtime": {
 			"name": "node",
-			"version": ">=26.7.0"
+			"version": ">=26.8.2"
 		}
 	}
 }

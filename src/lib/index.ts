@@ -114,9 +114,7 @@ function escapeAppleScriptString(value: string): string {
 function expandEquivalentHosts(urlContains: string): string[] {
 	const matchedHost = LOOPBACK_HOSTS.find((host) => urlContains.includes(host))
 
-	if (matchedHost === undefined) {
-		return [urlContains]
-	}
-
-	return LOOPBACK_HOSTS.map((host) => urlContains.replaceAll(matchedHost, () => host))
+	return matchedHost === undefined
+		? [urlContains]
+		: LOOPBACK_HOSTS.map((host) => urlContains.replaceAll(matchedHost, () => host))
 }
