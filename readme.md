@@ -56,7 +56,15 @@ Or, install globally for access across your system:
 npm install --global poptab
 ```
 
-Or, most often, it ends up in a `package.json` script, e.g.:
+Or, install the CLI tool globally with Homebrew:
+
+```sh
+brew install kitschpatrol/tap/poptab
+```
+
+## Usage
+
+Most often, it ends up in a `package.json` script, e.g.:
 
 ```json
 {
@@ -65,8 +73,6 @@ Or, most often, it ends up in a `package.json` script, e.g.:
   }
 }
 ```
-
-## Usage
 
 By default, poptab will close tabs in an open Chromium browser containing `//localhost:`.
 
