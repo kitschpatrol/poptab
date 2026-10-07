@@ -9,12 +9,13 @@
 [![NPM Package poptab](https://img.shields.io/npm/v/poptab.svg)](https://www.npmjs.com/package/poptab)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![CI](https://github.com/kitschpatrol/poptab/actions/workflows/ci.yml/badge.svg)](https://github.com/kitschpatrol/poptab/actions/workflows/ci.yml)
+[![Homebrew](https://img.shields.io/badge/Homebrew-kitschpatrol%2Ftap%2Fpoptab-FBB040?logo=homebrew&logoColor=white)](https://github.com/kitschpatrol/homebrew-tap/blob/HEAD/Formula/poptab.rb)
 
 <!-- /badges -->
 
 <!-- short-description -->
 
-**A CLI tool and library to clean up specific browser tabs.**
+**CLI tool and library to clean up specific browser tabs.**
 
 <!-- /short-description -->
 
@@ -30,36 +31,48 @@ By default, `poptab` is silent: it prints nothing on success, failure, or unsupp
 
 ### Dependencies
 
-The poptab CLI tool requires Node 20.19.0+. The exported APIs are ESM-only and share the Node 20.19.0+ requirement. Poptab is implemented in TypeScript and bundles type definitions.
+<!-- dependencies({ heading: false }) -->
 
-It can close tabs in Chromium, Chrome, or Safari
+- [Node.js](https://nodejs.org/) 24.16.0 or newer (specifically `^24.16.0 || >=26.0.0`)
+
+<!-- /dependencies -->
+
+The CLI tool and the exported APIs share this requirement. The exported APIs are ESM-only. Poptab is implemented in TypeScript and bundles type definitions.
+
+It can close tabs in Chromium, Chrome, or Safari.
 
 The implementation relies on macOS-specific scripting capabilities. On Linux and Windows it is a no-op.
 
 ### Installation
 
-Invoke directly:
+Pick the option that matches how you plan to use it.
 
-```sh
-npx poptab
-```
+#### As a library
 
-Or, install locally to access the CLI commands in a single project or to import the provided APIs:
+Add it to your project to import the TypeScript API. This also puts the `poptab` CLI on your project's path:
 
 ```sh
 npm install poptab
 ```
 
-Or, install globally for access across your system:
+#### As a CLI tool
+
+Run it once without installing:
 
 ```sh
-npm install --global poptab
+npx poptab
 ```
 
-Or, install the CLI tool globally with Homebrew:
+Or install it globally with Homebrew:
 
 ```sh
 brew install kitschpatrol/tap/poptab
+```
+
+Or install it globally with npm:
+
+```sh
+npm install --global poptab
 ```
 
 ## Usage
@@ -93,7 +106,7 @@ console.log(`Closed ${closedTabs} tab(s)`)
 
 ### CLI
 
-<!-- cli-help -->
+<!-- cli-help({ heading: false, headingLevel: 3 }) -->
 
 #### Command: `poptab`
 

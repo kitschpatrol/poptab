@@ -1,7 +1,7 @@
 {
 	"name": "poptab",
 	"version": "1.2.1",
-	"description": "A CLI tool and library to clean up specific browser tabs.",
+	"description": "CLI tool and library to clean up specific browser tabs.",
 	"keywords": [
 		"browser",
 		"tabs",
@@ -42,12 +42,13 @@
 		"clean-deep": "shx rm -f pnpm-lock.yaml && git clean -fdX -e !.claude/",
 		"fix": "ksc fix",
 		"lint": "ksc lint",
+		"prepare": "skills experimental_sync -y -f",
 		"release": "bumpp --commit 'Release: %s' && pnpm build && pnpm publish --otp $(op item get npm --otp) && brewpub --tap kitschpatrol/tap",
 		"test": "vitest run"
 	},
 	"dependencies": {
 		"@sindresorhus/is": "^8.1.0",
-		"@types/node": "~22.0.3",
+		"@types/node": "~24.13.6",
 		"@types/yargs": "^17.0.35",
 		"defu": "^6.1.7",
 		"nano-spawn": "^2.1.0",
@@ -55,19 +56,20 @@
 	},
 	"devDependencies": {
 		"@arethetypeswrong/core": "^0.18.5",
-		"@kitschpatrol/shared-config": "^8.10.0",
-		"brewpub": "^0.4.0",
+		"@kitschpatrol/shared-config": "^8.12.1",
+		"brewpub": "^0.5.0",
 		"bumpp": "^12.3.0",
-		"mdat-plugin-cli-help": "^3.2.0",
-		"publint": "^0.3.24",
+		"mdat-plugin-cli-help": "^3.4.0",
+		"publint": "^0.3.25",
 		"shx": "^0.4.0",
+		"skills": "^1.7.0",
 		"tsdown": "^0.23.0",
 		"typescript": "~6.0.3",
-		"vitest": "^5.0.1"
+		"vitest": "^5.0.3"
 	},
-	"packageManager": "pnpm@12.4.0",
+	"packageManager": "pnpm@12.9.1",
 	"engines": {
-		"node": ">=22.0.0"
+		"node": "^24.16.0 || >=26.0.0"
 	},
 	"devEngines": {
 		"runtime": {
