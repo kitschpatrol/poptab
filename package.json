@@ -56,7 +56,7 @@
 	},
 	"devDependencies": {
 		"@arethetypeswrong/core": "^0.18.5",
-		"@kitschpatrol/shared-config": "^8.12.1",
+		"@kitschpatrol/shared-config": "^8.13.1",
 		"brewpub": "^0.5.0",
 		"bumpp": "^12.3.0",
 		"mdat-plugin-cli-help": "^3.4.0",
